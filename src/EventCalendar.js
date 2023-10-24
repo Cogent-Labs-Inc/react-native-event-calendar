@@ -5,6 +5,8 @@ import {
   TouchableOpacity,
   Image,
   Text,
+  ScrollView,
+  Pressable,
 } from 'react-native';
 import _ from 'lodash';
 import moment from 'moment';
@@ -25,6 +27,7 @@ export default class EventCalendar extends React.Component {
     this.state = {
       date: moment(this.props.initDate),
       index: this.props.size,
+      selectedDay: null,
     };
   }
 
@@ -65,6 +68,7 @@ export default class EventCalendar extends React.Component {
     });
   }
 
+
   _renderItem({ index, item }) {
     const {
       width,
@@ -79,26 +83,26 @@ export default class EventCalendar extends React.Component {
     const date = moment(initDate).add(index - this.props.size, 'days');
 
     const leftIcon = this.props.headerIconLeft ? (
-        this.props.headerIconLeft
+      this.props.headerIconLeft
     ) : (
-        <Image source={require('./back.png')} style={this.styles.arrow} />
+      <Image source={require('./back.png')} style={this.styles.arrow} />
     );
     const rightIcon = this.props.headerIconRight ? (
-        this.props.headerIconRight
+      this.props.headerIconRight
     ) : (
-        <Image source={require('./forward.png')} style={this.styles.arrow} />
+      <Image source={require('./forward.png')} style={this.styles.arrow} />
     );
 
     let headerText = upperCaseHeader
-        ? date.format(formatHeader || 'DD MMMM YYYY').toUpperCase()
-        : date.format(formatHeader || 'DD MMMM YYYY');
+      ? date.format(formatHeader || 'DD MMMM YYYY').toUpperCase()
+      : date.format(formatHeader || 'DD MMMM YYYY');
 
     return (
       <View style={[this.styles.container, { width }]}>
-        <View style={this.styles.header}>
+        {/* <View style={this.styles.header}>
           <TouchableOpacity
-              style={this.styles.arrowButton}
-              onPress={this._previous}
+            style={this.styles.arrowButton}
+            onPress={this._previous}
           >
             {leftIcon}
           </TouchableOpacity>
@@ -106,12 +110,38 @@ export default class EventCalendar extends React.Component {
             <Text style={this.styles.headerText}>{headerText}</Text>
           </View>
           <TouchableOpacity
-              style={this.styles.arrowButton}
-              onPress={this._next}
+            style={this.styles.arrowButton}
+            onPress={this._next}
           >
             {rightIcon}
           </TouchableOpacity>
-        </View>
+        </View> */}
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {this._getCurrentMonthDays()?.map(({ id, day, date }) => (
+            <Pressable
+              style={[this.styles.calendarContainer, { backgroundColor: this.state.selectedDay === id ? '#3c9' : '#ededed' }]}
+              key={id}
+              onPress={() => this._handleDatePress(id)}
+            >
+              <Text
+                style={[
+                  this.styles.dayText, { color: this.state.selectedDay === id ? '#fff' : '#525252' }
+                ]}
+              >
+                {day}
+              </Text>
+              <Text
+                style={[
+                  this.styles.dateText, { color: this.state.selectedDay === id ? '#fff' : '#525252' }
+                ]}
+              >
+                {date}
+              </Text>
+            </Pressable>
+          ))}
+
+
+        </ScrollView>
         <DayView
           date={date}
           index={index}
@@ -174,6 +204,30 @@ export default class EventCalendar extends React.Component {
     }
   };
 
+  _handleDatePress = (id) => {
+    this.setState({
+      selectedDay: id,
+    });
+  }
+
+  _getCurrentMonthDays() {
+    let monthArr = [];
+    const firstDay = moment().startOf('month');
+    const lastDay = moment().endOf('month');
+    for (
+      let date = moment(firstDay);
+      date.isSameOrBefore(lastDay);
+      date.add(1, 'day')
+    ) {
+      monthArr.push({
+        id: date.format('YYYY-MM-DD'),
+        date: date.format('DD'),
+        day: date.format('ddd'),
+      });
+    }
+    return monthArr;
+  };
+
   render() {
     const {
       width,
@@ -181,7 +235,7 @@ export default class EventCalendar extends React.Component {
       events,
       initDate,
     } = this.props;
-
+    console.log(this.state.isClicked, "hello")
     return (
       <View style={[this.styles.container, { width }]}>
         <VirtualizedList
