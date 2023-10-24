@@ -22,7 +22,8 @@ export default function styleConstructor(theme = {}, calendarHeight) {
       borderTopWidth: 1,
       borderBottomWidth: 1,
       borderColor: '#E6E8F0',
-      backgroundColor: '#F5F5F6',
+      backgroundColor: '#FFF',
+      height:60,
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'stretch',
@@ -33,11 +34,12 @@ export default function styleConstructor(theme = {}, calendarHeight) {
     },
     headerText: {
       fontSize: 16,
+      fontFamily: 'OpenSans-Bold',
       ...theme.headerText,
     },
     arrow: {
-      width: 15,
-      height: 15,
+      width: 24,
+      height: 24,
       resizeMode: 'contain',
     },
     arrowButton: {
