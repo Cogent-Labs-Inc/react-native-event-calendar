@@ -99,24 +99,7 @@ export default class EventCalendar extends React.Component {
 
     return (
       <View style={[this.styles.container, { width }]}>
-        {/* <View style={this.styles.header}>
-          <TouchableOpacity
-            style={this.styles.arrowButton}
-            onPress={this._previous}
-          >
-            {leftIcon}
-          </TouchableOpacity>
-          <View style={this.styles.headerTextContainer}>
-            <Text style={this.styles.headerText}>{headerText}</Text>
-          </View>
-          <TouchableOpacity
-            style={this.styles.arrowButton}
-            onPress={this._next}
-          >
-            {rightIcon}
-          </TouchableOpacity>
-        </View> */}
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        <ScrollView style={{ flexGrow: 0, backgroundColor: '#f7f7f7' }} horizontal showsHorizontalScrollIndicator={false}>
           {this._getCurrentMonthDays()?.map(({ id, day, date }) => (
             <Pressable
               style={[this.styles.calendarContainer, { backgroundColor: this.state.selectedDay === id ? '#3c9' : '#ededed' }]}
@@ -235,7 +218,7 @@ export default class EventCalendar extends React.Component {
       events,
       initDate,
     } = this.props;
-   
+    console.log(this.state.isClicked, "hello")
     return (
       <View style={[this.styles.container, { width }]}>
         <VirtualizedList
