@@ -212,7 +212,6 @@ export default class DayView extends React.PureComponent {
     const { styles } = this.props;
     return (
       <View style={{ flex: 6 / 0.2, paddingBottom: this.state.isAtBottom ? 80 : 0 }}>
-
         <ScrollView
           ref={ref => (this._scrollView = ref)}
           scrollEventThrottle={16}
