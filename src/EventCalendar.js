@@ -82,24 +82,13 @@ export default class EventCalendar extends React.Component {
     } = this.props;
     const date = moment(initDate).add(index - this.props.size, 'days');
 
-    const leftIcon = this.props.headerIconLeft ? (
-      this.props.headerIconLeft
-    ) : (
-      <Image source={require('./back.png')} style={this.styles.arrow} />
-    );
-    const rightIcon = this.props.headerIconRight ? (
-      this.props.headerIconRight
-    ) : (
-      <Image source={require('./forward.png')} style={this.styles.arrow} />
-    );
-
     let headerText = upperCaseHeader
       ? date.format(formatHeader || 'DD MMMM YYYY').toUpperCase()
       : date.format(formatHeader || 'DD MMMM YYYY');
 
     return (
       <View style={[this.styles.container, { width }]}>
-        <ScrollView style={{ flexGrow: 0, backgroundColor: '#f7f7f7' }} horizontal showsHorizontalScrollIndicator={false}>
+        <ScrollView style={{ flexGrow: 1, backgroundColor: '#f7f7f7' }} horizontal showsHorizontalScrollIndicator={false}>
           {this._getCurrentMonthDays()?.map(({ id, day, date }) => (
             <Pressable
               style={[this.styles.calendarContainer, { backgroundColor: this.state.selectedDay === id ? '#3c9' : '#ededed' }]}
