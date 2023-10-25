@@ -235,7 +235,7 @@ export default class EventCalendar extends React.Component {
       events,
       initDate,
     } = this.props;
-    console.log(this.state.isClicked, "hello")
+   
     return (
       <View style={[this.styles.container, { width }]}>
         <VirtualizedList
