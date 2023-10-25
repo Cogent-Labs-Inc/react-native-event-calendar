@@ -30,8 +30,10 @@ export default class DayView extends React.PureComponent {
     this.state = {
       _scrollY: initPosition,
       packedEvents,
+      isAtBottom: false
     };
   }
+
 
   componentWillReceiveProps(nextProps) {
     const width = nextProps.width - LEFT_MARGIN;
@@ -44,6 +46,7 @@ export default class DayView extends React.PureComponent {
     this.props.scrollToFirst && this.scrollToFirst();
   }
 
+
   scrollToFirst() {
     setTimeout(() => {
       if (this.state && this.state._scrollY && this._scrollView) {
@@ -55,6 +58,7 @@ export default class DayView extends React.PureComponent {
       }
     }, 1);
   }
+
 
   _renderRedLine() {
     const offset = 100;
@@ -182,7 +186,7 @@ export default class DayView extends React.PureComponent {
                   {moment(event.end).format(formatTime)}
                 </Text>
               ) : null}
-              </View>
+            </View>
           )}
         </TouchableOpacity>
       );
@@ -195,20 +199,33 @@ export default class DayView extends React.PureComponent {
     );
   }
 
+  handleScroll = (event) => {
+    const offsetY = event.nativeEvent.contentOffset.y;
+    const contentHeight = event.nativeEvent.contentSize.height;
+    const scrollViewHeight = event.nativeEvent.layoutMeasurement.height;
+    const isAtBottom = offsetY >= (contentHeight - scrollViewHeight) * 0.9;
+
+    this.setState({ isAtBottom });
+  }
+
   render() {
     const { styles } = this.props;
     return (
-      <ScrollView
-        ref={ref => (this._scrollView = ref)}
-        contentContainerStyle={[
-          styles.contentStyle,
-          { width: this.props.width },
-        ]}
-      >
-        {this._renderLines()}
-        {this._renderEvents()}
-        {this._renderRedLine()}
-      </ScrollView>
+      <View style={{ paddingBottom: this.state.isAtBottom ? 100 : 0 }}>
+        <ScrollView
+          ref={ref => (this._scrollView = ref)}
+          scrollEventThrottle={60}
+          onScroll={this.handleScroll}
+          contentContainerStyle={[
+            styles.contentStyle,
+            { width: this.props.width, },
+          ]}
+        >
+          {this._renderLines()}
+          {this._renderEvents()}
+          {this._renderRedLine()}
+        </ScrollView>
+      </View>
     );
   }
 }
