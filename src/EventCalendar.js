@@ -222,8 +222,10 @@ export default class EventCalendar extends React.Component {
           getItemLayout={this._getItemLayout.bind(this)}
           horizontal
           pagingEnabled
+          scrollEnabled={false}
           renderItem={this._renderItem.bind(this)}
           style={{ width: width }}
+          scro
           onMomentumScrollEnd={event => {
             const index = parseInt(event.nativeEvent.contentOffset.x / width);
             const date = moment(this.props.initDate).add(
