@@ -88,7 +88,7 @@ export default class EventCalendar extends React.Component {
 
     return (
       <View style={[this.styles.container, { width }]}>
-        <ScrollView style={{ flexGrow: 1, backgroundColor: '#f7f7f7' }} horizontal showsHorizontalScrollIndicator={false}>
+        {/* <ScrollView style={{ flexGrow: 1, backgroundColor: '#f7f7f7' }} horizontal showsHorizontalScrollIndicator={false}>
           {this._getCurrentMonthDays()?.map(({ id, day, date }) => (
             <Pressable
               style={[this.styles.calendarContainer, { backgroundColor: this.state.selectedDay === id ? '#3c9' : '#ededed' }]}
@@ -113,7 +113,7 @@ export default class EventCalendar extends React.Component {
           ))}
 
 
-        </ScrollView>
+        </ScrollView> */}
         <DayView
           date={date}
           index={index}
