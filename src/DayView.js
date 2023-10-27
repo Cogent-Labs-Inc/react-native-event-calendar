@@ -103,7 +103,7 @@ export default class DayView extends React.PureComponent {
       return [
         <Text
           key={`timeLabel${i}`}
-          style={[styles.timeLabel, { top: offset * index - 6 }]}
+          style={[styles.timeLabel, { top: offset * index - 6, color: '#000', fontSize: 12, fontWeight: '400', fontFamily: 'SourceSansPro-Regular' }]}
         >
           {timeText}
         </Text>,

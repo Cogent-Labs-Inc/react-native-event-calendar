@@ -8,11 +8,11 @@ export default function styleConstructor(theme = {}, calendarHeight) {
   let style = {
     container: {
       flex: 1,
-      backgroundColor: '#ffff',
+      backgroundColor: '#f7f7f7',
       ...theme.container,
     },
     contentStyle: {
-      backgroundColor: '#ffff',
+      backgroundColor: '#f7f7f7',
       height: calendarHeight + 10,
       ...theme.contentStyle,
     },
