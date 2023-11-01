@@ -30,7 +30,7 @@ export default class DayView extends React.PureComponent {
     this.state = {
       _scrollY: initPosition,
       packedEvents,
-      isAtBottom: false
+       isAtBottom: false
     };
   }
 
@@ -199,14 +199,14 @@ export default class DayView extends React.PureComponent {
     );
   }
 
-  handleScroll = (event) => {
-    const offsetY = event.nativeEvent.contentOffset.y;
-    const contentHeight = event.nativeEvent.contentSize.height;
-    const scrollViewHeight = event.nativeEvent.layoutMeasurement.height;
-    const isAtBottom = offsetY >= (contentHeight - scrollViewHeight) * 0.9;
+  // handleScroll = (event) => {
+  //   const offsetY = event.nativeEvent.contentOffset.y;
+  //   const contentHeight = event.nativeEvent.contentSize.height;
+  //   const scrollViewHeight = event.nativeEvent.layoutMeasurement.height;
+  //   const isAtBottom = offsetY >= (contentHeight - scrollViewHeight) * 0.9;
 
-    this.setState({ isAtBottom });
-  }
+  //   this.setState({ isAtBottom });
+  // }
 
   render() {
     const { styles } = this.props;
@@ -215,7 +215,7 @@ export default class DayView extends React.PureComponent {
         <ScrollView
           ref={ref => (this._scrollView = ref)}
           scrollEventThrottle={16}
-          onScroll={this.handleScroll}
+          // onScroll={this.handleScroll}
           contentContainerStyle={[
             styles.contentStyle,
             { width: this.props.width, },
