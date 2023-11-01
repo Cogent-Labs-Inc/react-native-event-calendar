@@ -215,6 +215,7 @@ export default class DayView extends React.PureComponent {
         <ScrollView
           ref={ref => (this._scrollView = ref)}
           scrollEventThrottle={16}
+          showsVerticalScrollIndicator={false}
           // onScroll={this.handleScroll}
           contentContainerStyle={[
             styles.contentStyle,

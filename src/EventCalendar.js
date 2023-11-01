@@ -197,6 +197,7 @@ export default class EventCalendar extends React.Component {
           horizontal
           pagingEnabled
           scrollEnabled={false}
+          showsVerticalScrollIndicator={false}
           renderItem={this._renderItem.bind(this)}
           style={{ width: width, backgroundColor: '#000' }}
           onMomentumScrollEnd={event => {
