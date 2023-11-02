@@ -6,7 +6,8 @@ import {
   Image,
   Text,
   ScrollView,
-  Pressable,
+  Pressable, 
+  Dimensions,
 } from 'react-native';
 import _ from 'lodash';
 import moment from 'moment';
@@ -199,7 +200,8 @@ export default class EventCalendar extends React.Component {
           scrollEnabled={false}
           showsVerticalScrollIndicator={false}
           renderItem={this._renderItem.bind(this)}
-          style={{ width: width, backgroundColor: '#000' }}
+          style={{ width: width, }}
+          contentContainerStyle={{ paddingBottom: Dimensions.get('screen').height * 0.086 }}
           onMomentumScrollEnd={event => {
             const index = parseInt(event.nativeEvent.contentOffset.x / width);
             const date = moment(this.props.initDate).add(
