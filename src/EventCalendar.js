@@ -2,11 +2,6 @@
 import {
   VirtualizedList,
   View,
-  TouchableOpacity,
-  Image,
-  Text,
-  ScrollView,
-  Pressable, 
   Dimensions,
 } from 'react-native';
 import _ from 'lodash';
