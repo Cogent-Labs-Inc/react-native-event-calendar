@@ -159,10 +159,6 @@ export default class DayView extends React.PureComponent {
       const formatTime = this.props.format24h ? 'HH:mm' : 'hh:mm A';
       return (
         <TouchableOpacity
-          activeOpacity={0.5}
-          onPress={() =>
-            this._onEventTapped(this.props.events[event.index])
-          }
           key={i} style={[styles.event, style, event.color && eventColor]}
         >
           {this.props.renderEvent ? (
@@ -215,8 +211,7 @@ export default class DayView extends React.PureComponent {
         <ScrollView
           ref={ref => (this._scrollView = ref)}
           scrollEventThrottle={16}
-          showsVerticalScrollIndicator={false}
-          // onScroll={this.handleScroll}
+          showsVerticalScrollIndicator={false} 
           contentContainerStyle={[
             styles.contentStyle,
             { width: this.props.width, },
